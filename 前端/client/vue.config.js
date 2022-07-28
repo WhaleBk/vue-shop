@@ -45,15 +45,15 @@ module.exports = {
     port: 8080,
     https: false,
     hot: false,
-    proxy: {
-      "/api": {
-        target: "http://localhost:5000/api/",
-        ws: true,
-        changOrigin: true,
-        pathRewrite: {
-          "^/api": "",
-        },
-      },
-    },
+    // proxy: {
+    //   "/api": {
+    //     target: "https://rongrongya-7g81kb8432d7e9a8-1309272720.ap-shanghai.app.tcloudbase.com/lover",
+    //     ws: true,
+    //     changOrigin: true,
+    //     pathRewrite: {
+    //       "^/api": "",
+    //     },
+    //   },
+    // },
   },
 };

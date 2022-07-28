@@ -9,16 +9,16 @@
 </template>
 
 <script>
-import HeadNav from "../components/HeadNav";
-import LeftMenu from "../components/LeftMenu";
+import HeadNav from '../components/HeadNav'
+import LeftMenu from '../components/LeftMenu'
 
 export default {
-  name: "index",
+  name: 'index',
   components: {
     HeadNav,
-    LeftMenu
-  }
-};
+    LeftMenu,
+  },
+}
 </script>
 <style scoped>
 .index {

@@ -15,7 +15,7 @@ const state = { // 需要维护的状态
 
 const getters = {
   isAutnenticated: state => state.isAutnenticated,
-  user: state => state.user
+  user: state => state.user 
 }
 
 const mutations = {

@@ -1,78 +1,106 @@
 <template>
-    <header class="head-nav">
-        <el-row>
-            <el-col :span="6" class='logo-container'>
-                <img src="../assets/logo.png" class='logo' alt="">
-                <span class='title'>米修在线后台管理系统</span>
-            </el-col>
-            <el-col :span='6' class="user">
-                <div class="userinfo">
-                    <img :src="user.avatar" class='avatar' alt="">
-                     <div class='welcome'>
-                        <p class='name comename'>欢迎</p>
-                        <p class='name avatarname'>{{user.name}}</p>
-                    </div>
-                    <span class='username'>
-                        <el-dropdown
-                                trigger="click"
-                                @command='setDialogInfo'>
-                            <span class="el-dropdown-link">
-                                <i class="el-icon-caret-bottom el-icon--right"></i>
-                            </span>
-                            <el-dropdown-menu slot="dropdown">
-                                <el-dropdown-item command='info'>个人信息</el-dropdown-item>
-                                <el-dropdown-item  command='logout'>退出</el-dropdown-item>
-                            </el-dropdown-menu>
-                        </el-dropdown>
-                     </span>
-                </div>
-            </el-col>
+  <header class="head-nav">
+    <el-row>
+      <el-col :span="6" class="logo-container">
+        <img src="../assets/logo5.jpg" id="rry" class="logo avatar_img" alt />
+        <span class="title">校园在线后台管理系统</span>
+      </el-col>
 
-        </el-row>
+      <el-col :span="6" class="user">
+        <div class="userinfo">
+          <img :src="user.avatar" class="avatar" alt />
+          <div class="welcome">
+            <p class="name comename">欢迎</p>
+            <p class="name avatarname">{{user.name}}</p>
+          </div>
 
-    </header>
+          <span class="username">
+            <el-dropdown trigger="click" @command="setDialogInfo">
+              <span class="el-dropdown-link">
+                <i class="el-icon-caret-bottom el-icon--right"></i>
+              </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item command="info">个人信息</el-dropdown-item>
+                <el-dropdown-item command="logout">退出</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </span>
+        </div>
+      </el-col>
+    </el-row>
+  </header>
 </template>
 <script>
 export default {
-  name: "head-nav",
+  name: 'head-nav',
   computed: {
     user() {
-      return this.$store.getters.user;
-    }
+      return this.$store.getters.user
+    },
+  },
+  created() {
+    this.getUerInfo()
   },
   methods: {
+    getUerInfo() {
+      this.$axios.post('/user', this.loginUser).then((res) => {
+        // 存储用户数据
+        this.$store.dispatch('setUser', res.data)
+      })
+    },
     setDialogInfo(cmditem) {
       if (!cmditem) {
-        console.log("test");
-        this.$message("菜单选项缺少command属性");
-        return;
+        console.log('test')
+        this.$message('菜单选项缺少command属性')
+        return
       }
       switch (cmditem) {
-        case "info":
-          this.showInfoList();
-          break;
-        case "logout":
-          this.logout();
-          break;
+        case 'info':
+          this.showInfoList()
+          break
+        case 'logout':
+          this.logout()
+          break
       }
     },
     showInfoList() {
       // 个人信息
-      this.$router.push("/infoshow");
+      this.$router.push('/infoshow')
     },
     logout() {
       // 清除token
-      localStorage.removeItem("eleToken");
-      this.$store.dispatch("clearCurrentState");
+      localStorage.removeItem('eleToken')
+      this.$store.dispatch('clearCurrentState')
 
       // 页面跳转
-      this.$router.push("/login");
-    }
-  }
-};
+      this.$router.push('/login')
+    },
+  },
+}
 </script>
 
 <style scoped>
+.avatar_box {
+  height: 100px;
+  width: 100px;
+  padding: 10%;
+  border: 1px solid rgb(0, 238, 255);
+  border-radius: 50%;
+  padding: 10px;
+  box-shadow: 0 0 100px rgb(43, 188, 255);
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  transform: translate(-0%, -50%);
+  top: 50px;
+}
+.avatar_img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: white;
+  box-shadow: 0 0 100px rgb(43, 188, 255);
+}
 .head-nav {
   width: 100%;
   height: 60px;
@@ -96,7 +124,7 @@ export default {
 .title {
   vertical-align: middle;
   font-size: 22px;
-  font-family: "Microsoft YaHei";
+  font-family: 'Microsoft YaHei';
   letter-spacing: 3px;
 }
 .user {
